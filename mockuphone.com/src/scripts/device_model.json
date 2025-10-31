@@ -1,0 +1,577 @@
+{
+  "iphone-15": {
+    "name": "iPhone 15",
+    "launchDateTimestamp": "2023-09-22T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-15-black",
+      "apple-iphone-15-blue",
+      "apple-iphone-15-green",
+      "apple-iphone-15-yellow",
+      "apple-iphone-15-pink"
+    ]
+  },
+  "iphone-15-plus": {
+    "name": "iPhone 15 Plus",
+    "launchDateTimestamp": "2023-09-22T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-15-plus-black",
+      "apple-iphone-15-plus-blue",
+      "apple-iphone-15-plus-green",
+      "apple-iphone-15-plus-yellow",
+      "apple-iphone-15-plus-pink"
+    ]
+  },
+  "iphone-15-pro": {
+    "name": "iPhone 15 Pro",
+    "launchDateTimestamp": "2023-09-22T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-15-pro-black-titanium",
+      "apple-iphone-15-pro-white-titanium",
+      "apple-iphone-15-pro-blue-titanium",
+      "apple-iphone-15-pro-natural-titanium"
+    ]
+  },
+  "iphone-15-pro-max": {
+    "name": "iPhone 15 Pro Max",
+    "launchDateTimestamp": "2023-09-22T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-15-pro-max-black-titanium",
+      "apple-iphone-15-pro-max-white-titanium",
+      "apple-iphone-15-pro-max-blue-titanium",
+      "apple-iphone-15-pro-max-natural-titanium"
+    ]
+  },
+  "iphone-14": {
+    "name": "iPhone 14",
+    "launchDateTimestamp": "2022-09-16T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone14-blue",
+      "apple-iphone14-midnight",
+      "apple-iphone14-purple",
+      "apple-iphone14-red",
+      "apple-iphone14-starlight"
+    ]
+  },
+  "iphone-14-plus": {
+    "name": "iPhone 14 Plus",
+    "launchDateTimestamp": "2022-09-16T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone14plus-blue",
+      "apple-iphone14plus-midnight",
+      "apple-iphone14plus-purple",
+      "apple-iphone14plus-red",
+      "apple-iphone14plus-starlight"
+    ]
+  },
+  "iphone-14-pro": {
+    "name": "iPhone 14 Pro",
+    "launchDateTimestamp": "2022-09-16T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone14pro-deeppurple",
+      "apple-iphone14pro-gold",
+      "apple-iphone14pro-silver",
+      "apple-iphone14pro-spaceblack"
+    ]
+  },
+  "iphone-14-pro-max": {
+    "name": "iPhone 14 Pro Max",
+    "launchDateTimestamp": "2022-09-16T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone14promax-deeppurple",
+      "apple-iphone14promax-gold",
+      "apple-iphone14promax-silver",
+      "apple-iphone14promax-spaceblack"
+    ]
+  },
+  "iphone-13": {
+    "name": "iPhone 13",
+    "launchDateTimestamp": "2021-09-14T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone13-blue",
+      "apple-iphone13-midnight",
+      "apple-iphone13-pink",
+      "apple-iphone13-red",
+      "apple-iphone13-starlight"
+    ]
+  },
+  "iphone-13-mini": {
+    "name": "iPhone 13 Mini",
+    "launchDateTimestamp": "2021-09-14T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone13mini-blue",
+      "apple-iphone13mini-midnight",
+      "apple-iphone13mini-pink",
+      "apple-iphone13mini-red",
+      "apple-iphone13mini-starlight"
+    ]
+  },
+  "iphone-13-pro": {
+    "name": "iPhone 13 Pro",
+    "launchDateTimestamp": "2021-09-14T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone13pro-gold",
+      "apple-iphone13pro-graphite",
+      "apple-iphone13pro-sierrablue",
+      "apple-iphone13pro-silver"
+    ]
+  },
+  "iphone-13-pro-max": {
+    "name": "iPhone 13 Pro Max",
+    "launchDateTimestamp": "2021-09-14T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone13promax-gold",
+      "apple-iphone13promax-graphite",
+      "apple-iphone13promax-sierrablue",
+      "apple-iphone13promax-silver"
+    ]
+  },
+  "iphone-se": {
+    "name": "iPhone SE",
+    "launchDateTimestamp": "2016-03-31T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-se-black",
+      "apple-iphone-se-white",
+      "apple-iphone-se-red"
+    ]
+  },
+  "iphone-8": {
+    "name": "iPhone 8",
+    "launchDateTimestamp": "2017-09-22T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-8-gold",
+      "apple-iphone-8-silver",
+      "apple-iphone-8-space-grey"
+    ]
+  },
+  "iphone-8-plus": {
+    "name": "iPhone 8 Plus",
+    "launchDateTimestamp": "2017-09-22T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-8-plus-gold",
+      "apple-iphone-8-plus-silver",
+      "apple-iphone-8-plus-space-grey"
+    ]
+  },
+  "iphone-11": {
+    "name": "iPhone 11",
+    "launchDateTimestamp": "2019-09-20T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-11-black",
+      "apple-iphone-11-green",
+      "apple-iphone-11-yellow",
+      "apple-iphone-11-purple",
+      "apple-iphone-11-red",
+      "apple-iphone-11-white"
+    ]
+  },
+  "iphone-11-pro": {
+    "name": "iPhone 11 Pro",
+    "launchDateTimestamp": "2019-09-20T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-11-pro-gold",
+      "apple-iphone-11-pro-silver",
+      "apple-iphone-11-pro-space-grey",
+      "apple-iphone-11-pro-midnight-green"
+    ]
+  },
+  "iphone-11-pro-max": {
+    "name": "iPhone 11 Pro Max",
+    "launchDateTimestamp": "2019-09-20T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "apple-iphone-11-pro-max-gold",
+      "apple-iphone-11-pro-max-silver",
+      "apple-iphone-11-pro-max-space-grey",
+      "apple-iphone-11-pro-max-midnight-green"
+    ]
+  },
+  "ipad-pro-11-inch": {
+    "name": "iPad Pro 11\"",
+    "launchDateTimestamp": "2018-11-07T00:00:00Z",
+    "type": "tablet",
+    "slugs": ["apple-ipadpro11-spacegrey"]
+  },
+  "ipad-pro-13-inch": {
+    "name": "iPad Pro 13\"",
+    "launchDateTimestamp": "2018-11-07T00:00:00Z",
+    "type": "tablet",
+    "slugs": ["apple-ipadpro13-spacegrey"]
+  },
+  "ipad-air-5": {
+    "name": "iPad Air 5",
+    "launchDateTimestamp": "2022-03-18T00:00:00Z",
+    "type": "tablet",
+    "slugs": ["apple-ipadair5-spacegrey"]
+  },
+  "ipad": {
+    "name": "iPad",
+    "launchDateTimestamp": "2020-09-25T00:00:00Z",
+    "type": "tablet",
+    "slugs": ["apple-ipad-silver"]
+  },
+  "ipad-mini": {
+    "name": "iPad Mini",
+    "launchDateTimestamp": "2019-03-18T00:00:00Z",
+    "type": "tablet",
+    "slugs": ["apple-ipadmini-starlight"]
+  },
+  "google-pixel-1": {
+    "name": "Google Pixel",
+    "launchDateTimestamp": "2016-10-04T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "google-pixel-quite-black",
+      "google-pixel-really-blue",
+      "google-pixel-very-silver"
+    ]
+  },
+  "google-pixel-4": {
+    "name": "Google Pixel 4",
+    "launchDateTimestamp": "2019-10-15T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "google-pixel4-clearlywhite",
+      "google-pixel4-justblack",
+      "google-pixel4-ohsoorange"
+    ]
+  },
+  "google-pixel-4-xl": {
+    "name": "Google Pixel 4 Xl",
+    "launchDateTimestamp": "2019-10-15T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "google-pixel4xl-clearlywhite",
+      "google-pixel4xl-justblack",
+      "google-pixel4xl-ohsoorange"
+    ]
+  },
+  "google-pixel-5": {
+    "name": "Google Pixel 5",
+    "launchDateTimestamp": "2020-09-30T00:00:00Z",
+    "type": "phone",
+    "slugs": ["google-pixel5-justblack", "google-pixel5-sortasage"]
+  },
+  "google-pixel-8": {
+    "name": "Google Pixel 8",
+    "launchDateTimestamp": "2023-10-12T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "google-pixel-8-rose",
+      "google-pixel-8-hazel",
+      "google-pixel-8-obsidian"
+    ]
+  },
+  "google-pixel-7": {
+    "name": "Google Pixel 7",
+    "launchDateTimestamp": "2022-10-13T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "google-pixel-7-obsidian",
+      "google-pixel-7-snow",
+      "google-pixel-7-lemongrass"
+    ]
+  },
+  "google-pixel-slate": {
+    "name": "Google Pixel Slate",
+    "launchDateTimestamp": "2018-11-27T00:00:00Z",
+    "type": "tablet",
+    "slugs": ["google-pixel-slate"]
+  },
+  "moto-e": {
+    "name": "Moto E",
+    "launchDateTimestamp": "2014-05-13T00:00:00Z",
+    "type": "phone",
+    "slugs": ["motorola-motoe-black", "motorola-motoe-white"]
+  },
+  "moto-g": {
+    "name": "Moto G",
+    "launchDateTimestamp": "2013-11-13T00:00:00Z",
+    "type": "phone",
+    "slugs": ["motorola-motog"]
+  },
+  "galaxy-s24-ultra": {
+    "name": "Samsung Galaxy S24 Ultra",
+    "launchDateTimestamp": "2024-01-31T00:00:00Z",
+    "type": "phone",
+    "slugs": ["samsung-galaxy-s24-ultra"]
+  },
+  "galaxy-s21-plus": {
+    "name": "Samsung Galaxy S21+",
+    "launchDateTimestamp": "2021-01-29T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "samsung-galaxys21plus-black",
+      "samsung-galaxys21plus-silver",
+      "samsung-galaxys21plus-violet"
+    ]
+  },
+  "galaxy-s21-ultra": {
+    "name": "Samsung Galaxy S21 Ultra",
+    "launchDateTimestamp": "2021-01-29T00:00:00Z",
+    "type": "phone",
+    "slugs": ["samsung-galaxys21ultra-black", "samsung-galaxys21ultra-silver"]
+  },
+  "galaxy-s21": {
+    "name": "Samsung Galaxy S21",
+    "launchDateTimestamp": "2021-01-29T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "samsung-galaxys21-black",
+      "samsung-galaxys21-pink",
+      "samsung-galaxys21-violet",
+      "samsung-galaxys21-white"
+    ]
+  },
+  "galaxy-s20-plus": {
+    "name": "Samsung Galaxy S20+",
+    "launchDateTimestamp": "2020-02-11T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "samsung-galaxys20plus-cloudblue",
+      "samsung-galaxys20plus-cosmicgrey",
+      "samsung-galaxys20plus-cosmicblack"
+    ]
+  },
+  "galaxy-s20": {
+    "name": "Samsung Galaxy S20",
+    "launchDateTimestamp": "2020-02-11T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "samsung-galaxys20-cloudblue",
+      "samsung-galaxys20-cosmicgrey",
+      "samsung-galaxys20-pink"
+    ]
+  },
+  "galaxy-s20-ultra": {
+    "name": "Samsung Galaxy S20 Ultra",
+    "launchDateTimestamp": "2020-02-11T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "samsung-galaxys20ultra-cosmicblack",
+      "samsung-galaxys20ultra-cosmicgrey"
+    ]
+  },
+  "galaxy-s-duos": {
+    "name": "Samsung Galaxy S Duos",
+    "launchDateTimestamp": "2012-09-26T00:00:00Z",
+    "type": "phone",
+    "slugs": ["samsung-galaxysduos"]
+  },
+  "galaxy-s4": {
+    "name": "Samsung Galaxy S4",
+    "launchDateTimestamp": "2013-04-26T00:00:00Z",
+    "type": "phone",
+    "slugs": ["samsung-galaxys4-white", "samsung-galaxys4-black"]
+  },
+  "galaxy-note-5": {
+    "name": "Samsung Galaxy Note 5",
+    "launchDateTimestamp": "2015-08-13T00:00:00Z",
+    "type": "phone",
+    "slugs": [
+      "samsung-galaxynote5-black",
+      "samsung-galaxynote5-gold",
+      "samsung-galaxynote5-pink",
+      "samsung-galaxynote5-silvertitanium",
+      "samsung-galaxynote5-white"
+    ]
+  },
+  "galaxy-y": {
+    "name": "Samsung Galaxy Y",
+    "launchDateTimestamp": "2011-10-11T00:00:00Z",
+    "type": "phone",
+    "slugs": ["samsung-galaxyy-black", "samsung-galaxyy-white"]
+  },
+  "oneplus-8-pro": {
+    "name": "OnePlus 8 Pro",
+    "launchDateTimestamp": "2020-04-14T00:00:00Z",
+    "type": "phone",
+    "slugs": ["oneplus-oneplus8pro"]
+  },
+  "huawei-p-40-pro-plus": {
+    "name": "Huawei P40 Pro+",
+    "launchDateTimestamp": "2020-04-07T00:00:00Z",
+    "type": "phone",
+    "slugs": ["huawei-p-40-pro-plus"]
+  },
+  "apple-watch-ultra": {
+    "name": "Apple Watch Ultra",
+    "launchDateTimestamp": "2022-09-23T00:00:00Z",
+    "type": "wearables",
+    "slugs": ["apple-applewatchultra"]
+  },
+  "apple-watch-ultra-2": {
+    "name": "Apple Watch Ultra 2",
+    "launchDateTimestamp": "2023-09-22T00:00:00Z",
+    "type": "wearables",
+    "slugs": [
+      "apple-watch-ultra-2-orange-ocean-band",
+      "apple-watch-ultra-2-blue-alpine-loop",
+      "apple-watch-ultra-2-orange-beige-trail-loop"
+    ]
+  },
+  "apple-watch-series-5-40mm": {
+    "name": "Apple Watch Series 5 40mm",
+    "launchDateTimestamp": "2019-09-20T00:00:00Z",
+    "type": "wearables",
+    "slugs": [
+      "apple-watch-series-5-40-mm-space-grey-aluminum-black-closed",
+      "apple-watch-series-5-40-mm-gold-aluminum-pink-sand-closed",
+      "apple-watch-series-5-40-mm-white-ceramic-white-closed"
+    ]
+  },
+  "apple-watch-series-8-41mm": {
+    "name": "Apple Watch Series 8 41mm",
+    "launchDateTimestamp": "2022-09-16T00:00:00Z",
+    "type": "wearables",
+    "slugs": [
+      "apple-applewatch41mm-goldstainlesssteel",
+      "apple-applewatch41mm-graphitestainlesssteel",
+      "apple-applewatch41mm-midnightaluminum",
+      "apple-applewatch41mm-silveraluminum",
+      "apple-applewatch41mm-silverstainlesssteel",
+      "apple-applewatch41mm-starlightaluminum"
+    ]
+  },
+  "apple-watch-series-8-45mm": {
+    "name": "Apple Watch Series 8 45mm",
+    "launchDateTimestamp": "2022-09-16T00:00:00Z",
+    "type": "wearables",
+    "slugs": [
+      "apple-applewatch45mm-goldstainlesssteel",
+      "apple-applewatch45mm-graphitestainlesssteel",
+      "apple-applewatch45mm-midnightaluminum",
+      "apple-applewatch45mm-silveraluminum",
+      "apple-applewatch45mm-silverstainlesssteel",
+      "apple-applewatch45mm-starlightaluminum"
+    ]
+  },
+  "macbook-12-inch": {
+    "name": "Macbook 12\"",
+    "launchDateTimestamp": "2015-04-10T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["apple-macbook-gold", "apple-macbook-grey"]
+  },
+  "macbook-pro-14-inch": {
+    "name": "Macbook Pro 14\"",
+    "launchDateTimestamp": "2021-10-18T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["apple-macbookpro14"]
+  },
+  "macbook-pro-16-inch": {
+    "name": "Macbook Pro 16\"",
+    "launchDateTimestamp": "2019-11-14T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["apple-macbookpro16"]
+  },
+  "macbook-air-13-inch": {
+    "name": "Macbook Air 13\"",
+    "launchDateTimestamp": "2020-11-10T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["apple-macbookair13"]
+  },
+  "imac-2013": {
+    "name": "iMac 2013",
+    "launchDateTimestamp": "2013-09-24T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["apple-imac2013"]
+  },
+  "imac-2015": {
+    "name": "iMac 2015",
+    "launchDateTimestamp": "2015-10-13T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["apple-imac2015"]
+  },
+  "imac-2015-retina": {
+    "name": "iMac 2015 Retina",
+    "launchDateTimestamp": "2015-10-13T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["apple-imac2015retina"]
+  },
+  "dell-xps-13": {
+    "name": "Dell XPS 13",
+    "launchDateTimestamp": "2015-01-07T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["dell-xps13"]
+  },
+  "dell-xps-15": {
+    "name": "Dell XPS 15",
+    "launchDateTimestamp": "2015-05-05T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["dell-xps15"]
+  },
+  "microsoft-surface-book": {
+    "name": "Surface Book",
+    "launchDateTimestamp": "2015-10-06T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["microsoft-surfacebook"]
+  },
+  "microsoft-surface-pro-4": {
+    "name": "Surface Pro 4",
+    "launchDateTimestamp": "2015-10-06T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["microsoft-surfacepro4"]
+  },
+  "microsoft-surface-pro-3": {
+    "name": "Surface Pro 3",
+    "launchDateTimestamp": "2014-05-20T00:00:00Z",
+    "type": "laptop",
+    "slugs": ["microsoft-surfacepro3"]
+  },
+  "samsung-tv-es8000": {
+    "name": "Samsung TV ES8000",
+    "launchDateTimestamp": "2012-01-01T00:00:00Z",
+    "type": "tv",
+    "slugs": ["samsung-es8000"]
+  },
+  "samsung-tv-d8000": {
+    "name": "Samsung TV D8000",
+    "launchDateTimestamp": "2011-01-01T00:00:00Z",
+    "type": "tv",
+    "slugs": ["samsung-d8000"]
+  },
+  "lg-55lw5600": {
+    "name": "LG TV 55LW5600",
+    "launchDateTimestamp": "2011-01-01T00:00:00Z",
+    "type": "tv",
+    "slugs": ["lg-55lw5600"]
+  },
+  "lg-tm2792": {
+    "name": "LG TV TM2792",
+    "launchDateTimestamp": "2012-01-01T00:00:00Z",
+    "type": "tv",
+    "slugs": ["lg-tm2792"]
+  },
+  "galaxy-watch-4": {
+    "name": "Samsung Galaxy Watch 4",
+    "launchDateTimestamp": "2021-08-27T00:00:00Z",
+    "type": "wearables",
+    "slugs": [
+      "samsung-galaxy-watch-4-black",
+      "samsung-galaxy-watch-4-pink-gold",
+      "samsung-galaxy-watch-4-silver"
+    ]
+  },
+  "nokia3310": {
+    "name": "Nokia 3310 - The Unbreakable",
+    "launchDateTimestamp": "2000-09-01T00:00:00Z",
+    "type": "tv",
+    "slugs": ["nokia3310"]
+  }
+}

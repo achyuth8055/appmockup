@@ -1,0 +1,360 @@
+---
+import sizeOf from "image-size";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import ErrorPage from "../../components/ErrorPage.astro";
+import RequestDeviceCard from "../../components/RequestDeviceCard/RequestDeviceCard.astro";
+import DeviceBaseLayout from "../../layouts/BaseLayout/BaseLayout.astro";
+import { DEVICE_MANAGER } from "../../scripts/deviceManager";
+import deviceJson from "../../scripts/device_info.json";
+import type { ModelValue } from "../../scripts/model";
+import { ModelEnum } from "../../scripts/parse";
+import "./upload.css";
+import * as Matrix from "../../scripts/utils/matrix";
+import * as Rect from "../../scripts/utils/rect";
+import * as Quad from "../../scripts/utils/quad";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export async function getStaticPaths() {
+  const allModels: {
+    params: { model: ModelEnum };
+    props: { targetModel: ModelEnum };
+  }[] = [];
+
+  Object.keys(DEVICE_MANAGER.allDeviceModels).forEach((modelId: string) => {
+    const _modelId = ModelEnum.parse(modelId);
+    allModels.push({
+      params: { model: _modelId },
+      props: { targetModel: _modelId },
+    });
+  });
+  return allModels;
+}
+
+const { targetModel } = Astro.props;
+const _targetModel = ModelEnum.parse(targetModel);
+
+const model: ModelValue | undefined = DEVICE_MANAGER.getModel(_targetModel);
+
+if (model == null) {
+  return Astro.redirect("/404");
+}
+const sameModelDevices = model.devices;
+
+const deviceDetail = sameModelDevices[0];
+
+const defaultColorId = deviceDetail.color?.id ?? "default";
+
+function getImagePath(path: string) {
+  return join(__dirname, "../../../public", path);
+}
+
+function getImageRect(fullPath: string): Rect.Rect {
+  const { width = 0, height = 0 } = sizeOf(fullPath);
+  return Rect.fromDimension(width, height);
+}
+
+function computeDeviceScreenRect(
+  screenCoordQuad: Quad.Quad,
+  deviceImageRect: Rect.Rect,
+  templateImageRect: Rect.Rect | null,
+): Rect.Rect {
+  // Assume horizontally center aligned. Try to compute the screen coord space size
+  // by adding margins to the screen rect width
+  const screenCoordMinX = Math.min(...screenCoordQuad.map((c) => c[0]));
+  const screenCoordMaxX = Math.max(...screenCoordQuad.map((c) => c[0]));
+
+  // Try to guess the space size from screen coord quad
+  const guessScreenCoordSpaceSize = screenCoordMaxX + screenCoordMinX;
+  const screenCoordSpaceSize =
+    templateImageRect?.width ?? guessScreenCoordSpaceSize;
+
+  const imgToScreenCoordSpaceRatio =
+    deviceImageRect.width / screenCoordSpaceSize;
+
+  const mat = Matrix.composeTransformation(
+    // Scale to image space
+    Matrix.scale(imgToScreenCoordSpaceRatio),
+
+    // Scale to percentage space
+    Matrix.scale(100 / deviceImageRect.width, 100 / deviceImageRect.height),
+  );
+
+  return Rect.fromQuad(Quad.transformWithMatrix(screenCoordQuad, mat));
+}
+
+let imgRect: Rect.Rect | null = null;
+let deviceScreenRect: Rect.Rect | null = null;
+if (deviceDetail.imagePath != null && deviceDetail.imagePath.length >= 1) {
+  const templateImageRect =
+    deviceDetail.orientations[0].template_image_size != null
+      ? Rect.fromDimension(
+          deviceDetail.orientations[0].template_image_size[0],
+          deviceDetail.orientations[0].template_image_size[1],
+        )
+      : null;
+  imgRect = getImageRect(getImagePath(deviceDetail.imagePath[0][0]));
+  deviceScreenRect = computeDeviceScreenRect(
+    deviceDetail.orientations[0].coords,
+    imgRect,
+    templateImageRect,
+  );
+}
+---
+
+<script>
+  // ref: https://stackoverflow.com/questions/47879864/how-can-i-check-if-a-browser-supports-webassembly
+  const supportWebAssembly = () => {
+    try {
+      if (
+        typeof WebAssembly === "object" &&
+        typeof WebAssembly.instantiate === "function"
+      ) {
+        const module = new WebAssembly.Module(
+          Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00),
+        );
+        if (module instanceof WebAssembly.Module)
+          return (
+            new WebAssembly.Instance(module) instanceof WebAssembly.Instance
+          );
+      }
+    } catch (e) {}
+
+    return false;
+  };
+
+  const mainElem = document.getElementById("main-page");
+  const webassemblyNotSupportedElem = document.getElementById(
+    "webassembly-not-supported",
+  );
+  if (supportWebAssembly()) {
+    if (webassemblyNotSupportedElem) {
+      webassemblyNotSupportedElem.style.display = "none";
+    }
+  } else {
+    if (mainElem) {
+      mainElem.style.display = "none";
+    }
+  }
+</script>
+<DeviceBaseLayout>
+  <script define:vars={{ deviceDetail }}>
+    window.location.recommendsize = deviceDetail["display_resolution"];
+    window.deviceDetail = deviceDetail;
+    window.workerDeviceId = deviceDetail.device_id;
+  </script>
+  <script define:vars={{ deviceJson }}>
+    window.deviceInfo = deviceJson;
+  </script>
+  <script type="text/javascript" src="/scripts/vendor/psd.min.js"></script>
+  <script src="./models/_image-upload.js"></script>
+  <script src="./_upload.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"
+  ></script>
+  <div class="mockup-content">
+    <header class="device-header">
+      <h2 class="device-header__name">{model.name}</h2>
+    </header>
+    <div class="mockup-lg">
+      <div class="mockup-lg-left">
+        <div class="device">
+          <div class="upload__inner-box" data-color-id={defaultColorId}>
+            <div class="upload__image-wrapper">
+              <img
+                class="upload__device-image"
+                src={deviceDetail.imagePath?.[0][0]}
+                alt={deviceDetail.imagePath?.[0][1]}
+              />
+              {
+                imgRect != null && deviceScreenRect != null ? (
+                  <div class="upload__device-image-rect-wrapper">
+                    <div
+                      class:list={[
+                        "upload__device-image-rect",
+                        {
+                          "w-full": imgRect.width >= imgRect.height,
+                          "h-full": imgRect.height > imgRect.width,
+                        },
+                      ]}
+                      style={{
+                        aspectRatio: `${imgRect.width} / ${imgRect.height}`,
+                      }}
+                    >
+                      <div
+                        class="upload__device-image-rect__screen-rect"
+                        style={{
+                          width: `${deviceScreenRect.width}%`,
+                          height: `${deviceScreenRect.height}%`,
+                          top: `${deviceScreenRect.centerY}%`,
+                          left: `${deviceScreenRect.centerX}%`,
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      >
+                        <div class="upload__device-hint pl-2 pr-2">
+                          Upload <br /> Image Here
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div class="upload__device-hint">
+                    Upload <br /> Image Here
+                  </div>
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mockup-lg-right">
+        <div id="above-file-uploaded"></div>
+        <section class="file-uploaded">
+          <h3 class="file-uploaded__heading">FILE UPLOAD</h3>
+          <div class="upload-guide">
+            <img src="/images/upload-blue.svg" />
+            <h3 class="upload-guide__title">Upload your images here</h3>
+            <label class="upload-guide__browse-btn" for="file[]"
+              >Or browse files</label
+            >
+            <input
+              class="upload-guide__file-input"
+              id="download"
+              type="file"
+              name="file[]"
+              accept=".jpg,.jpeg,.png,.psd"
+              multiple
+            />
+          </div>
+          <p class="upload-guide__hint">
+            Recommend size <span id="upload-guide__hint-x"
+              >{deviceDetail.display_resolution?.[0]}</span
+            >px *
+
+            <span id="upload-guide__hint-y"
+              >{deviceDetail.display_resolution?.[1]}</span
+            >px, We support jpg, png and psd
+          </p>
+          <ul class="file-list"></ul>
+          {
+            deviceDetail.color == null ? undefined : (
+              <div class="color-section">
+                <h3 class="color-section__heading">COLOR</h3>
+                <p class="color-section__description">
+                  {deviceDetail.color.name}
+                </p>
+                <div class="color-picker-scrollable">
+                  <ul class="color-picker">
+                    {sameModelDevices.map((d) =>
+                      d.color == null ? undefined : (
+                        <li class="color-picker-item-container">
+                          <button
+                            style={{ backgroundColor: d.color.hexcode }}
+                            class={`color-picker-item ${
+                              d.color.id === defaultColorId
+                                ? "color-picker-item--selected"
+                                : ""
+                            }`}
+                            type="button"
+                            data-device-id={d.device_id}
+                            data-tippy-content={d.color.name}
+                            data-color-id={d.color.id}
+                            data-color-name={d.color.name}
+                            data-image-path-portrait={d.imagePath?.[0]?.[0]}
+                            data-image-path-landscape={d.imagePath?.[1]?.[0]}
+                            data-credits={d.credits}
+                            data-display-resolution-x={
+                              d.display_resolution?.[0]
+                            }
+                            data-display-resolution-y={
+                              d.display_resolution?.[1]
+                            }
+                          />
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </div>
+              </div>
+            )
+          }
+
+          <button disabled class="generate-btn">Generate product mockups</button
+          >
+          <button style="display:none" class="start-mockup-btn"
+            >Generate product mockups</button
+          >
+        </section>
+
+        <section class="device-info">
+          <div class="device-support">
+            <h3 class="device-support__heading">DEVICE ORIENTATIONS</h3>
+            <ul class="device-support__orientation-list">
+              {
+                deviceDetail.imagePath?.map((path: string[], index: number) => (
+                  <img
+                    class="device-support__orientation-image"
+                    data-image-path-index={index}
+                    data-orientation={deviceDetail.orientations[index].name}
+                    src={path[0]}
+                    alt={path[1]}
+                  />
+                ))
+              }
+            </ul>
+          </div>
+          <div class="device-credits">
+            <h3 class="device-credits__heading">CREDITS</h3>
+            <div class="device-credits__desc">
+              <Fragment set:html={deviceDetail.credits} />
+            </div>
+          </div>
+        </section>
+
+        <RequestDeviceCard />
+      </div>
+    </div>
+    <div class="generating-modal d-none">
+      <div class="generating-modal__overlay"></div>
+      <div class="generating-modal-dialog">
+        <div class="generating-modal__spinner"></div>
+        <h3 class="generating-modal-dialog__text">Generating...</h3>
+        <button class="generating-modal-dialog__cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</DeviceBaseLayout>
+<ErrorPage pageId="webassembly-not-supported" paddingTop="50px">
+  <p slot="title">
+    This browser doesn't support web assembly<br />
+    <span class="blue">Consider upgrading to a modern browser:</span>
+  </p>
+  <div slot="list">
+    <ul>
+      <li>
+        <a target="_blank" href="https://www.mozilla.org/firefox/new/"
+          >Firefox</a
+        >
+      </li>
+      <li>
+        <a target="_blank" href="https://www.google.com/chrome/">Chrome</a>
+      </li>
+      <li>
+        <a target="_blank" href="https://support.apple.com/downloads/safari"
+          >Safari</a
+        >
+      </li>
+      <li>
+        <a target="_blank" href="https://www.microsoft.com/en-us/edge/download"
+          >Edge</a
+        >
+      </li>
+    </ul>
+  </div>
+</ErrorPage>
+
+<div id="drop-zone-overlay" class="drop-zone-overlay">
+  Drop your screenshot anywhere.
+</div>

@@ -1,0 +1,27 @@
+---
+import ListItem from "../../components/ListItem.astro";
+import BaseLayout from "../../layouts/BaseLayout/BaseLayout.astro";
+import { DeviceTypeEnum } from "../../scripts/parse";
+
+const deviceTypes: DeviceTypeEnum[] = [
+  "phone",
+  "tablet",
+  "laptop",
+  "wearables",
+  "tv",
+];
+---
+
+<BaseLayout>
+  <meta
+    slot="meta"
+    name="description"
+    content="MockUPhone supports devices including iPhone mockup, iPad mockup, Android mockup and TV mockup. You can check out the whole device list via this page."
+  />
+  <div class="static-page device-list-page">
+    <h1 class="title">Device List</h1>
+    <div class="content">
+      {deviceTypes.map((deviceType) => <ListItem type={deviceType} />)}
+    </div>
+  </div>
+</BaseLayout>

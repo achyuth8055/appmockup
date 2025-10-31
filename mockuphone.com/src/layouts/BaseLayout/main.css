@@ -1,0 +1,305 @@
+:root {
+  --black: #000;
+  --gray-1: #333;
+  --gray-2: #4f4f4f;
+  --gray-3: #828282;
+  --gray-4: #bdbdbd;
+  --gray-5: #e0e0e0;
+  --gray-6: #f2f2f2;
+  --white: #fff;
+  --green-3: #6fcf97;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.body--modal-open {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  transform: translate(0, -80px);
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+}
+
+figure {
+  margin: 0;
+}
+
+#main-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  z-index: 100;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  height: 80px;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 20px;
+  border-bottom: 1px solid var(--gray-5);
+  background-color: rgb(255 255 255 / 100%);
+  box-shadow: 0 4px 15px 0 #0000001a;
+}
+
+@media (width >= 576px) {
+  .header {
+    padding: 15px 40px;
+  }
+}
+
+.header-transparent {
+  background-color: rgb(255 255 255 / 80%);
+}
+
+@media (width <= 680px) {
+  .header-transparent {
+    background-color: rgb(255 255 255 / 100%);
+  }
+}
+
+.header__logo-group {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 0%;
+}
+
+.header__skymaker-logo {
+  width: 176px;
+  vertical-align: text-bottom;
+}
+
+.header__skymaker-logo-link {
+  z-index: 10;
+}
+
+.header__mockuphone-link {
+  margin-left: 25px;
+  z-index: 10;
+}
+
+.header__mockuphone-link:hover {
+  color: var(--black);
+}
+
+.header__share {
+  display: flex;
+  margin-left: auto;
+  flex: none;
+  z-index: 10;
+}
+
+.header__share-small {
+  min-width: 30px;
+}
+
+.header__share-small:hover {
+  cursor: pointer;
+}
+
+.header__share-default {
+  min-width: 56.5px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__share-facebook-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__share-twitter-link {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__mockuphone {
+  width: 114px;
+  max-width: 114px;
+  flex: 1 1 0%;
+  vertical-align: middle;
+}
+
+@media (width <= 640px) {
+  .header__skymaker-logo-link {
+    min-width: 0;
+    width: 47%; /* 176 / (176+200) */
+  }
+
+  .header__skymaker-logo {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .header__mockuphone-link {
+    min-width: 0;
+    width: 53%; /* 200 / (176+200) */
+    margin-left: 10px;
+  }
+
+  .header__mockuphone {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+main {
+  flex: 1;
+  margin-top: 80px;
+}
+
+.footer {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 46px;
+}
+
+@media (width >= 992px) {
+  .footer {
+    display: flex;
+    padding: 60px 100px;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.footer__lg-left {
+  padding: 0;
+  flex: 1 1 0%;
+}
+
+.footer__skymaker-logo {
+  display: block;
+  width: 140px;
+  margin: auto;
+  text-decoration-color: #fff;
+}
+
+@media (width >= 992px) {
+  .footer__lg-left {
+    padding: 0;
+  }
+
+  .footer__skymaker-logo {
+    padding-top: 0;
+    margin: 0 0 0 -4px;
+  }
+}
+
+.footer__slogan {
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
+}
+
+@media (width >= 992px) {
+  .footer__slogan {
+    margin-top: 0;
+    text-align: left;
+  }
+}
+
+.footer__sitemap {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 30px 0;
+  gap: 5px 15px;
+}
+
+.footer__sitemap-item {
+  white-space: nowrap;
+}
+
+.footer__sitemap-link {
+  color: var(--white);
+  font-size: 12px;
+}
+
+.footer__sitemap-link:hover {
+  color: var(--white);
+}
+
+@media (width >= 992px) {
+  .footer__sitemap {
+    justify-content: flex-start;
+    margin: 30px 0 0;
+  }
+}
+
+.footer__product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__product-image {
+  display: block;
+  margin: auto;
+}
+
+.footer__product-name {
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 5px;
+  text-align: center;
+}
+
+@media (width >= 992px) {
+  .footer__product-list {
+    display: flex;
+    column-gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.static-page {
+  margin: 0 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.static-page p {
+  text-align: justify;
+}
+
+@media (width >= 992px) {
+  .static-page {
+    margin: 0 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}

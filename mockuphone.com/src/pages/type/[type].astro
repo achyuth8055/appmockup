@@ -1,0 +1,267 @@
+---
+import BaseLayout from "../../layouts/BaseLayout/BaseLayout.astro";
+import RequestDeviceCard from "../../components/RequestDeviceCard/RequestDeviceCard.astro";
+
+import "./index.css";
+
+import type { BrandValue, ModelThumbnail } from "../../scripts/model";
+import { BrandEnum, DeviceTypeEnum } from "../../scripts/parse";
+import { DEVICE_MANAGER } from "../../scripts/deviceManager";
+import DeviceSearch from "../../components/DeviceSearch/DeviceSearch.astro";
+
+export async function getStaticPaths() {
+  const devicePaths = DeviceTypeEnum.options.map((deviceType) => ({
+    params: { type: deviceType },
+    props: { deviceType: deviceType },
+  }));
+  const allPath = { params: { type: "all" }, props: { deviceType: "all" } };
+
+  return [allPath, ...devicePaths];
+}
+
+const { type } = Astro.params;
+const { deviceType } = Astro.props;
+
+const thumbnailList: ModelThumbnail[] =
+  DEVICE_MANAGER.getModelThumbnailListByType(deviceType);
+const brandThumbnailList: Partial<Record<BrandEnum, ModelThumbnail[]>> =
+  DEVICE_MANAGER.getBrandModelThumbnailList(deviceType);
+const brandValues: Partial<Record<BrandEnum, BrandValue>> =
+  DEVICE_MANAGER.getBrandValues();
+const nonEmptyBrands: BrandEnum[] = Object.keys(brandThumbnailList)
+  .filter((b) => {
+    const brand = BrandEnum.parse(b);
+    const thumbnails: ModelThumbnail[] | undefined = brandThumbnailList[brand];
+    return thumbnails != null && thumbnails.length > 0;
+  })
+  .map((b) => BrandEnum.parse(b));
+const brandList: Array<BrandEnum | "all"> = ["all", ...nonEmptyBrands];
+---
+
+<BaseLayout shouldRenderSearchBar={true}>
+  <meta
+    slot="meta"
+    name="description"
+    content="MockUPhone supports devices including iPhone mockup, iPad mockup, Android mockup and TV mockup. You can check out the whole device list via this page."
+  />
+  <script src="./_device.js"></script>
+  <script define:vars={{ thumbnailList, brandThumbnailList }}>
+    window.thumbnailList = thumbnailList;
+    window.brandThumbnailList = brandThumbnailList;
+  </script>
+  <section class="search-device">
+    <DeviceSearch id="device-list__page__autocomplete" />
+  </section>
+  <section class="device-type">
+    <header>
+      <h2 class="device-type__heading">SELECT DEVICE TYPE</h2>
+    </header>
+    <ul class="device-type-list">
+      <li class="device-type-list__item">
+        <a href="/type/all">
+          <figure>
+            {
+              type == "all" ? (
+                <div class="device-type-list__circle-image device-type-list__circle-image-all--chosen device-type-list__circle-image--chosen" />
+              ) : (
+                <div class="device-type-list__circle-image device-type-list__circle-image-all" />
+              )
+            }
+            <figcaption class="device-type__name">All</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="device-type-list__item">
+        <a href="/type/phone">
+          <figure>
+            {
+              type == "phone" ? (
+                <div class="device-type-list__circle-image device-type-list__circle-image-phone--chosen device-type-list__circle-image--chosen" />
+              ) : (
+                <div class="device-type-list__circle-image device-type-list__circle-image-phone" />
+              )
+            }
+            <figcaption class="device-type__name">Phone</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="device-type-list__item">
+        <a href="/type/tablet">
+          <figure>
+            {
+              type == "tablet" ? (
+                <div class="device-type-list__circle-image device-type-list__circle-image-tablet--chosen device-type-list__circle-image--chosen" />
+              ) : (
+                <div class="device-type-list__circle-image device-type-list__circle-image-tablet" />
+              )
+            }
+            <figcaption class="device-type__name">Tablet</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="device-type-list__item">
+        <a href="/type/laptop">
+          <figure>
+            {
+              type == "laptop" ? (
+                <div class="device-type-list__circle-image device-type-list__circle-image-computer--chosen device-type-list__circle-image--chosen" />
+              ) : (
+                <div class="device-type-list__circle-image device-type-list__circle-image-computer" />
+              )
+            }
+            <figcaption class="device-type__name">Laptop</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="device-type-list__item">
+        <a href="/type/wearables">
+          <figure>
+            {
+              type == "wearables" ? (
+                <div class="device-type-list__circle-image device-type-list__circle-image-wearables--chosen device-type-list__circle-image--chosen" />
+              ) : (
+                <div class="device-type-list__circle-image device-type-list__circle-image-wearables" />
+              )
+            }
+            <figcaption class="device-type__name">Wearables</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="device-type-list__item">
+        <a href="/type/tv">
+          <figure>
+            {
+              type == "tv" ? (
+                <div class="device-type-list__circle-image device-type-list__circle-image-tv--chosen device-type-list__circle-image--chosen" />
+              ) : (
+                <div class="device-type-list__circle-image device-type-list__circle-image-tv" />
+              )
+            }
+            <figcaption class="device-type__name">TV</figcaption>
+          </figure>
+        </a>
+      </li>
+    </ul>
+    <div class="device-brand-list-container">
+      <ul class="device-brand-list">
+        {
+          brandList.map((b: BrandEnum | "all") => (
+            <li class="device-brand-list__item">
+              <button
+                class={`device-brand-list__item-button ${
+                  b === "all" ? "device-brand-list__item-button--selected" : ""
+                }`}
+                id={`device-brand-list__item-button__${b}`}
+                data-brand-name={b}
+              >
+                {b === "all" ? "All Brands" : brandValues[b]?.name ?? b}
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="device-brand-select-container">
+      <select name="device-brand-select" id="device-brand-select">
+        {
+          brandList.map((b: BrandEnum | "all") => (
+            <option
+              class="device-brand-select__option"
+              value={b}
+              data-brand-name={b}
+            >
+              {b === "all" ? "All Brands" : brandValues[b]?.name ?? b}
+            </option>
+          ))
+        }
+      </select>
+    </div>
+  </section>
+  <section class="select-device">
+    <ul class="device-section-list">
+      {
+        Object.keys(brandThumbnailList).map((b: string) => {
+          const brand = BrandEnum.parse(b);
+          const thumbnails = brandThumbnailList[brand];
+          if (thumbnails == null || thumbnails.length === 0) {
+            return undefined;
+          }
+          return (
+            <li
+              class="device-section-list__item"
+              id={`device-section-list__item-${b}`}
+              data-brand-name={b}
+            >
+              <section
+                id={`device-section-${b}`}
+                class="device-section"
+                data-brand-name={b}
+              >
+                <h3 class="device-section__brand-name">
+                  {brand.toUpperCase()}
+                </h3>
+                {
+                  <ul class="device-grid-list">
+                    {thumbnails.map((thumbnail: ModelThumbnail) => (
+                      <div
+                        class="device-grid-container"
+                        data-device-id={thumbnail.device.device_id}
+                        data-model-name={thumbnail.modelName}
+                        data-model-id={thumbnail.modelId}
+                      >
+                        <h3 class="device-grid-container-header">
+                          {thumbnail.modelName}
+                        </h3>
+                        <li
+                          class="device-grid"
+                          data-image-index="0"
+                          data-n-image={thumbnail.device.imagePath?.length}
+                          id={thumbnail.device.device_id}
+                        >
+                          <a
+                            class="device-grid__link"
+                            href={"/model/" + thumbnail.modelId}
+                          >
+                            {thumbnail.device.imagePath?.map(
+                              (image: [string, string], index: number) => {
+                                if (index == 0)
+                                  return (
+                                    <img
+                                      class="device-grid__image"
+                                      src={image[0]}
+                                      alt={image[1]}
+                                    />
+                                  );
+                                else
+                                  return (
+                                    <img
+                                      class="device-grid__image d-none"
+                                      src={image[0]}
+                                      alt={image[1]}
+                                    />
+                                  );
+                              },
+                            )}
+                            <div class="device-grid__hover-blur d-none" />
+                            <div class="device-grid__overlay d-none">
+                              <button class="device-grid__overlay-pick-btn">
+                                Pick it
+                              </button>
+                            </div>
+                          </a>
+                        </li>
+                      </div>
+                    ))}
+                  </ul>
+                }
+              </section>
+            </li>
+          );
+        })
+      }
+      <li class="device-section-list__request-device">
+        <RequestDeviceCard />
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

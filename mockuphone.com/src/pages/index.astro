@@ -1,0 +1,129 @@
+---
+import "/src/styles/home.css";
+import BaseLayout from "../layouts/BaseLayout/BaseLayout.astro";
+import { Image } from "@astrojs/image/components";
+
+import DeviceSearch from "../components/DeviceSearch/DeviceSearch.astro";
+---
+
+<BaseLayout
+  isHeaderTransparent={true}
+  mainContainerClass="main--landing-content"
+>
+  <div class="landing-content">
+    <header class="headline">
+      <h2 class="headline__title">
+        Free and Simple Screenshots Device Mockups Generator
+      </h2>
+      <p class="headline__desc">
+        Wrap your design in mobile devices in a few clicks!
+      </p>
+    </header>
+    <DeviceSearch id="homepage-autocomplete" />
+    <ul class="quick-device-list">
+      <li class="quick-device-list__item quick-device-list__item__light-blue">
+        <a
+          class="quick-device-list__link quick-device-list__link__light-blue"
+          href="/model/iphone-15">iPhone 15</a
+        >
+      </li>
+      <li class="quick-device-list__item quick-device-list__item__light-blue">
+        <a
+          class="quick-device-list__link quick-device-list__link__light-blue"
+          href="/model/galaxy-s24-ultra">Samsung Galaxy S24 Ultra</a
+        >
+      </li>
+      <li class="quick-device-list__item quick-device-list__item__deep-blue">
+        <a
+          class="quick-device-list__link quick-device-list__link__deep-blue quick-device-list__all-device"
+          href="/type/all"
+          ><span>All Devices</span><img
+            src="/images/all-device-arrow.svg"
+            alt="all-device-arrow.svg"
+          /></a
+        >
+      </li>
+    </ul>
+    <div class="hero-image">
+      <div class="hero-image__shawdow"></div>
+    </div>
+
+    <section class="oursky-product-section">
+      <h3 class="oursky-product-section__heading">MORE FROM SKYMAKERS</h3>
+      <ul class="oursky-product-list">
+        <li class="oursky-product">
+          <a
+            class="oursky-product__link"
+            href="https://www.authgear.com/?utm_source=mockuphone&utm_medium=web&utm_campaign=mockuphone_ad"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <figure class="oursky-product__figure">
+              <Image
+                src="/images/home/authgear-color.svg"
+                alt="authgear-color.svg"
+                format="svg"
+                width={60}
+                height={60}
+              />
+              <figcaption class="oursky-product__caption">
+                <h4 class="oursky-product__caption-title">Authgear</h4>
+                <p class="oursky-product__caption-desc">
+                  Secure and unified authentication for your next apps
+                </p>
+              </figcaption>
+            </figure>
+          </a>
+        </li>
+        <li class="oursky-product">
+          <a
+            class="oursky-product__link"
+            href="https://makeappicon.com/?utm_source=mockuphone&utm_medium=web&utm_campaign=mockuphone_ad"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <figure class="oursky-product__figure">
+              <Image
+                src="/images/home/makeappicon-color.svg"
+                alt="mackappicon-color.svg"
+                format="svg"
+                width={60}
+                height={60}
+              />
+              <figcaption class="oursky-product__caption">
+                <h4 class="oursky-product__caption-title">MakeAppIcon</h4>
+                <p class="oursky-product__caption-desc">
+                  Best app icon resize for mobile developers
+                </p>
+              </figcaption>
+            </figure>
+          </a>
+        </li>
+        <li class="oursky-product">
+          <a
+            class="oursky-product__link"
+            href="https://www.formx.ai/?utm_source=mockuphone&utm_medium=web&utm_campaign=mockuphone_ad"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <figure class="oursky-product__figure">
+              <Image
+                src="/images/home/formxai-color.svg"
+                alt="formxai-color.svg"
+                format="svg"
+                width={60}
+                height={60}
+              />
+              <figcaption class="oursky-product__caption">
+                <h4 class="oursky-product__caption-title">FormX.ai</h4>
+                <p class="oursky-product__caption-desc">
+                  Extract data from Documents and Forms with AI
+                </p>
+              </figcaption>
+            </figure>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
