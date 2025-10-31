@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../layouts/BaseLayout/BaseLayout.astro";
+import { DEVICE_MANAGER } from "../scripts/deviceManager";
+import "../styles/multi-device.css";
+---
+
+<BaseLayout shouldRenderSearchBar={false}>
+  <script define:vars={{ deviceManager: DEVICE_MANAGER, deviceCatalogue: DEVICE_MANAGER.allDevices }}>
+    window.deviceManager = deviceManager;
+    window.__deviceCatalogue = deviceCatalogue;
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-olyJ7dBDEuDfSU/EYEYTbSsfXCMVvjJAnCmvYzuq/n6PvJEa3TBUnIFJWMGryuVKyXjH9MuquxYZc13JUO2RyQ==" crossorigin="anonymous" referrerpolicy="no-referrer" is:inline></script>
+  <script src="./multi-device-editor.js" defer></script>
+
+  <div class="multi-editor-shell">
+    <aside class="device-sidebar" id="device-sidebar">
+      <header class="device-sidebar__header">
+        <h1>Select a device frame</h1>
+        <p>Choose a device to start designing high-resolution screenshots.</p>
+      </header>
+
+      <div class="device-sidebar__filters" role="tablist" aria-label="Device categories">
+        <button class="filter-btn active" data-category="all" role="tab">All</button>
+        <button class="filter-btn" data-category="ios" role="tab">iOS</button>
+        <button class="filter-btn" data-category="android" role="tab">Android</button>
+        <button class="filter-btn" data-category="tablet" role="tab">Tablet</button>
+      </div>
+
+      <div class="device-sidebar__search">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 21l-4.35-4.35m1.35-3.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <input type="search" id="device-search" placeholder="Search device or model…" aria-label="Search devices" />
+      </div>
+
+      <div class="device-sidebar__list" id="device-list" role="list" aria-label="Device results"></div>
+
+      <footer class="device-sidebar__footer">
+        <button class="cta-btn" id="btn-continue" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Start Editing
+        </button>
+      </footer>
+    </aside>
+
+    <main class="workspace workspace--hidden" id="editor-workspace" aria-live="polite">
+      <header class="workspace__toolbar">
+        <div class="toolbar-left">
+          <button class="ghost-btn" id="btn-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Devices
+          </button>
+          <div class="workspace__device-meta" id="selected-device-info"></div>
+        </div>
+        <div class="toolbar-right">
+          <button class="ghost-btn" id="btn-duplicate-screen">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+              <rect x="4" y="4" width="11" height="11" rx="2" fill="currentColor" opacity="0.15" />
+            </svg>
+            Duplicate Screen
+          </button>
+          <button class="ghost-btn accent" id="btn-export">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12m0 0l-4-4m4 4 4-4M5 21h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Export ZIP
+          </button>
+        </div>
+      </header>
+
+      <section class="workspace__body">
+        <aside class="screen-queue" id="screen-queue" aria-label="Screen queue">
+          <div class="screen-queue__header">
+            <div>
+              <h2>Screens</h2>
+              <p class="muted">Drag thumbnails to reorder, or duplicate to branch new ideas.</p>
+            </div>
+            <button class="chip-btn" id="btn-add-screen">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Add Screen
+            </button>
+          </div>
+          <div class="screen-queue__list" id="screen-list"></div>
+        </aside>
+
+        <section class="stage" id="stage" aria-live="polite">
+          <div class="stage__empty" id="stage-empty">
+            <svg width="96" height="96" viewBox="0 0 120 120" aria-hidden="true">
+              <rect x="28" y="10" width="64" height="100" rx="12" fill="#EEF2FF"/>
+              <rect x="38" y="24" width="44" height="56" rx="8" fill="#C7D2FE"/>
+              <path d="M38 84h44" stroke="#818CF8" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <h3>Select a device to get started</h3>
+            <p>Pick a device frame from the library to begin editing individual app store screenshots.</p>
+          </div>
+        </section>
+
+        <aside class="properties-panel" id="properties-panel" aria-live="polite">
+          <div class="properties-panel__empty">
+            <h3>No screen selected</h3>
+            <p>Choose a screen from the queue to expose contextual settings.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <input type="file" id="screen-image-input" accept="image/*" hidden />
+
+  <div class="export-modal hidden" id="export-modal" role="dialog" aria-modal="true" aria-labelledby="export-progress-label">
+    <div class="export-modal__content">
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="export-modal__details">
+        <h3>Preparing exports</h3>
+        <p id="export-progress-label">0 of 0 screens</p>
+        <div class="export-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="export-progress-bar__fill" id="export-progress-fill"></div>
+        </div>
+      </div>
+      <button class="ghost-btn" id="export-cancel-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cancel
+      </button>
+    </div>
+  </div>
+</BaseLayout>
